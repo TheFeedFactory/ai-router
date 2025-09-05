@@ -25,7 +25,7 @@ spec:
         - name: PORT
           value: "3000"
         - name: TARGET_URL
-          value: "http://10.100.0.1"
+          value: "http://10.100.0.1:3002"
         - name: NODE_ENV
           value: "staging"
         resources:
