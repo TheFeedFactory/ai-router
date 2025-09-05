@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ai-router
+  labels:
+    app: ai-router
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ai-router
+  template:
+    metadata:
+      labels:
+        app: ai-router
+    spec:
+      containers:
+      - name: ai-router
+        image: ai-router:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: PORT
+          value: "3000"
+        - name: TARGET_URL
+          value: "http://10.0.100.0"
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 3000
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 5

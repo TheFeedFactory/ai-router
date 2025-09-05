@@ -1,0 +1,17 @@
+{
+  "name": "ai-router",
+  "version": "1.0.0",
+  "description": "Reverse proxy for AI services",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "http-proxy-middleware": "^2.0.6"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
