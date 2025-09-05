@@ -1,18 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ai-router
+  name: staging-ai-router
   labels:
-    app: ai-router
+    app: staging-ai-router
+    environment: staging
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ai-router
+      app: staging-ai-router
   template:
     metadata:
       labels:
-        app: ai-router
+        app: staging-ai-router
+        environment: staging
     spec:
       containers:
       - name: ai-router
@@ -24,6 +26,8 @@ spec:
           value: "3000"
         - name: TARGET_URL
           value: "http://10.100.0.1"
+        - name: NODE_ENV
+          value: "staging"
         resources:
           requests:
             memory: "64Mi"

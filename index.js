@@ -3,7 +3,7 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const TARGET_URL = process.env.TARGET_URL || 'http://10.0.100.0';
+const TARGET_URL = process.env.TARGET_URL || 'http://10.100.0.1';
 
 const proxyOptions = {
   target: TARGET_URL,
