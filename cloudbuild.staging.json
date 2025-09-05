@@ -2,11 +2,17 @@
   "timeout": "1200s",
   "steps": [
     {
-      "name": "gcr.io/kaniko-project/executor:latest",
+      "name": "gcr.io/cloud-builders/docker",
       "args": [
-        "--cache=true",
-        "--destination=gcr.io/${_PROJECT}/${_CONTAINERNAME}:${SHORT_SHA}"
+        "build",
+        "-t",
+        "gcr.io/${_PROJECT}/${_CONTAINERNAME}:${SHORT_SHA}",
+        "."
       ]
+    },
+    {
+      "name": "gcr.io/cloud-builders/docker",
+      "args": ["push", "gcr.io/${_PROJECT}/${_CONTAINERNAME}:${SHORT_SHA}"]
     },
     {
       "name": "gcr.io/cloud-builders/kubectl",
