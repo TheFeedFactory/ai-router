@@ -8,15 +8,10 @@ const TARGET_URL = process.env.TARGET_URL || "http://10.100.0.1:3002";
 const proxyOptions = {
   target: TARGET_URL,
   changeOrigin: true,
-  pathRewrite: {
-    "^/api/ai": "",
-  },
+  // Don't rewrite the path - keep /api/ai prefix as the backend expects it
   onProxyReq: (proxyReq, req, res) => {
     console.log(
-      `Proxying ${req.method} ${req.path} -> ${TARGET_URL}${req.path.replace(
-        "/api/ai",
-        ""
-      )}`
+      `Proxying ${req.method} ${req.path} -> ${TARGET_URL}${req.path}`
     );
   },
   onError: (err, req, res) => {
@@ -33,5 +28,5 @@ app.get("/health", (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`AI Router proxy listening on port ${PORT}`);
-  console.log(`Forwarding /api/ai/* to ${TARGET_URL}`);
+  console.log(`Forwarding /api/ai/* to ${TARGET_URL}/api/ai/*`);
 });
